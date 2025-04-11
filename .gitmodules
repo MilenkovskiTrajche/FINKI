@@ -1,0 +1,15 @@
+[submodule "PNVD"]
+	path = PNVD
+	url = https://github.com/MilenkovskiTrajche/PNVD
+[submodule "OS"]
+	path = OS
+	url = https://github.com/MilenkovskiTrajche/OS
+[submodule "OOP"]
+	path = OOP
+	url = https://github.com/MilenkovskiTrajche/OOP
+[submodule "DotNet"]
+	path = DotNet
+	url = https://github.com/MilenkovskiTrajche/.Net
+[submodule "ONVD"]
+	path = ONVD
+	url = https://github.com/MilenkovskiTrajche/ONVD
