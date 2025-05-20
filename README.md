@@ -23,11 +23,11 @@ The Faculty of Computer Science and Engineering (FINKI) is part of the Ss. Cyril
 
 | Course | Repository Link |
 |--------|------------------|
-| PNVD (Програмирање на вгнездени и дистрибуирани системи) | [🔗 PNVD](https://github.com/MilenkovskiTrajche/PNVD) |
+| PNVD (Програмирање на видео игри) | [🔗 PNVD](https://github.com/MilenkovskiTrajche/PNVD) |
 | OS (Оперативни системи) | [🔗 OS](https://github.com/MilenkovskiTrajche/OS) |
 | OOP (Објектно ориентирано програмирање) | [🔗 OOP](https://github.com/MilenkovskiTrajche/OOP) |
 | .NET Development | [🔗 .Net](https://github.com/MilenkovskiTrajche/.Net) |
-| ONVD (Основи на вгнездени и дистрибуирани системи) | [🔗 ONVD](https://github.com/MilenkovskiTrajche/ONVD) |
+| ONVD (Основи на веб дизајн) | [🔗 ONVD](https://github.com/MilenkovskiTrajche/ONVD) |
 
 ---
 
