@@ -12,6 +12,7 @@ import java.util.List;
 public class DataHolder {
     public static List<Chef> chefs = new ArrayList<>();
     public static List<Dish> dishes = new ArrayList<>();
+    public static Long id = 0L;
 
     @PostConstruct
     public void init(){
@@ -21,11 +22,10 @@ public class DataHolder {
         chefs.add(new Chef(4L,"Mitko","Mitkovski","best pizza chef", new ArrayList<>()));
         chefs.add(new Chef(5L,"Zoran","Zoranovski","No experience :D", new ArrayList<>()));
 
-        dishes.add(new Dish("d1","Sushi rolled salamon", "Japanese", 30));
-        dishes.add(new Dish("d2","Baked beans", "Macedonian", 60));
-        dishes.add(new Dish("d3","Chicago Burger", "American", 10));
-        dishes.add(new Dish("d4","Margarita", "Italian", 20));
-        dishes.add(new Dish("d5","Water", "International", 1));
-
+        dishes.add(new Dish(id++,"d1","Sushi rolled salamon", "Japanese", 30));
+        dishes.add(new Dish(id++,"d2","Baked beans", "Macedonian", 60));
+        dishes.add(new Dish(id++,"d3","Chicago Burger", "American", 10));
+        dishes.add(new Dish(id++,"d4","Margarita", "Italian", 20));
+        dishes.add(new Dish(id++,"d5","Water", "International", 1));
     }
 }
