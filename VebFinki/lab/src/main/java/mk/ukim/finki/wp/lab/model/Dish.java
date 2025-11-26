@@ -15,7 +15,7 @@ public class Dish {
     private String name;
     private String cuisine;
     private int preparationTime;
-    private Long counter = 100L;
+    private boolean like;
 
     public Dish(Long id, String dishId, String name, String cuisine, int preparationTime) {
         this.id = id;
@@ -23,13 +23,15 @@ public class Dish {
         this.name = name;
         this.cuisine = cuisine;
         this.preparationTime = preparationTime;
+        like = false;
     }
     public Dish(String dishId, String name, String cuisine, int preparationTime) {
-        this.id = counter++;
+        this.id = Counter.id;
         this.dishId = dishId;
         this.name = name;
         this.cuisine = cuisine;
         this.preparationTime = preparationTime;
+        Counter.id++;
     }
 
 }

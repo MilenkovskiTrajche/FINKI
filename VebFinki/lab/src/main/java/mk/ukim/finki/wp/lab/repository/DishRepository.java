@@ -11,4 +11,5 @@ public interface DishRepository {
     Optional<Dish> findById(Long id);
     Dish save(Dish dish);
     void deleteById(Long id);
+    Dish updateType(Long id, Boolean value);
 }

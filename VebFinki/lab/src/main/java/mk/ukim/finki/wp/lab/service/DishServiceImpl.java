@@ -47,4 +47,9 @@ public class DishServiceImpl implements  DishService {
     public void delete(Long id) {
         dishRepository.deleteById(id);
     }
+
+    @Override
+    public Dish updateType(Long id, Boolean value) {
+        return dishRepository.updateType(id, value);
+    }
 }

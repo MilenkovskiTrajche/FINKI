@@ -48,4 +48,12 @@ public class InMemoryDishRepository implements DishRepository {
             System.out.println("Dish not found");
         }
     }
+
+    @Override
+    public Dish updateType(Long id, Boolean value) {
+        Optional<Dish> d = findById(id);
+        d.ifPresent(dish -> dish.setLike(value));
+        return d.orElse(null);
+
+    }
 }

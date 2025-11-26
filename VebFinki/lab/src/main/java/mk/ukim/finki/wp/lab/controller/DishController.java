@@ -87,4 +87,16 @@ public class DishController {
         chefService.addDishToChef(chefId, dishId);
         return "redirect:/dishes/add-to-chef?chefId=" + chefId + "n&dishId=" + dishId;
     }
+
+    @GetMapping("/like/{id}")
+    public String updateDishLike(@PathVariable Long id){
+        dishService.updateType(id, true);
+        return "redirect:/dishes";
+    }
+
+    @GetMapping("/unlike/{id}")
+    public String updateDishUnLike(@PathVariable Long id){
+        dishService.updateType(id, false);
+        return "redirect:/dishes";
+    }
 }

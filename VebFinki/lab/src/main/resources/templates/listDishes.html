@@ -3,6 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>All Dishes</title>
+    <style type="text/css">
+        body {
+            width: 800px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        table, td, th {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        section {
+            float: left;
+            margin: 0 1.5%;
+            width: 63%;
+        }
+        aside {
+            float: right;
+            margin: 0 1.5%;
+            width: 30%;
+        }
+    </style>
 </head>
 <body>
 <h1>All Dishes</h1>
@@ -18,6 +48,7 @@
         <th>Cuisine</th>
         <th>Preparation Time</th>
         <th>Actions</th>
+        <th>Type</th>
     </tr>
     <tr th:each="dish : ${dishes}">
         <td th:text="${dish.dishId}"></td>
@@ -28,6 +59,12 @@
             <a th:href="@{/dishes/dish-form/{id}(id=${dish.id})}">Edit</a>
             <a th:href="@{/dishes/delete/{id}(id=${dish.id})}">Delete</a>
         </td>
+        <td th:text="${dish.isLike()} ? 'Liked' : 'Disliked'"></td>
+        <td>
+            <a th:href="${dish.isLike() ? '/dishes/unlike/' + dish.id : '/dishes/like/' + dish.id}"
+               th:text="${dish.isLike() ? 'Dislike' : 'Like'}"></a>
+        </td>
+
     </tr>
 </table>
 </body>
