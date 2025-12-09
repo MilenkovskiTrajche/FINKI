@@ -35,7 +35,7 @@
 
     <div th:each="dish : ${dishes}">
         <ul>
-            <li th:text="${dish.getName()} + ' - ' + ${dish.getCuisine()} + ' - ' + ${dish.getPreparationTime()} + ' min.' + '<br/>'"></li>
+            <li th:text="${dish.getName()} + ' - ' + ${dish.getCuisine()} + ' - ' + ${dish.getPreparationTime()} + ' min.'"></li>
         </ul>
     </div>
 </section>

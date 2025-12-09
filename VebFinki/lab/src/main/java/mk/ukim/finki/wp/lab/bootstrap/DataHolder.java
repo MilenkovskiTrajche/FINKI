@@ -2,6 +2,7 @@ package mk.ukim.finki.wp.lab.bootstrap;
 
 import jakarta.annotation.PostConstruct;
 import mk.ukim.finki.wp.lab.model.Chef;
+import mk.ukim.finki.wp.lab.model.Counter;
 import mk.ukim.finki.wp.lab.model.Dish;
 import org.springframework.stereotype.Component;
 
@@ -21,11 +22,10 @@ public class DataHolder {
         chefs.add(new Chef(4L,"Mitko","Mitkovski","best pizza chef", new ArrayList<>()));
         chefs.add(new Chef(5L,"Zoran","Zoranovski","No experience :D", new ArrayList<>()));
 
-        dishes.add(new Dish("d1","Sushi rolled salamon", "Japanese", 30));
-        dishes.add(new Dish("d2","Baked beans", "Macedonian", 60));
-        dishes.add(new Dish("d3","Chicago Burger", "American", 10));
-        dishes.add(new Dish("d4","Margarita", "Italian", 20));
-        dishes.add(new Dish("d5","Water", "International", 1));
-
+        dishes.add(new Dish(Counter.id++,"d1","Sushi rolled salamon", "Japanese", 30));
+        dishes.add(new Dish(Counter.id++,"d2","Baked beans", "Macedonian", 60));
+        dishes.add(new Dish(Counter.id++,"d3","Chicago Burger", "American", 10));
+        dishes.add(new Dish(Counter.id++,"d4","Margarita", "Italian", 20));
+        dishes.add(new Dish(Counter.id++,"d5","Water", "International", 1));
     }
 }
