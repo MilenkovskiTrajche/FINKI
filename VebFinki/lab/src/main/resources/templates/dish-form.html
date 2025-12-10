@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Dish Form</title>
@@ -12,6 +12,16 @@
     <label>Name: <input type="text" name="name" th:value="${dish.name}" required></label><br><br>
     <label>Cuisine: <input type="text" name="cuisine" th:value="${dish.cuisine}" required></label><br><br>
     <label>Preparation Time: <input type="number" name="preparationTime" th:value="${dish.preparationTime}" required></label><br><br>
+    <label>Chef:
+        <select name="chefId">
+            <option th:each="chef : ${chefs}"
+                    th:value="${chef.id}"
+                    th:text="${chef.firstName + ' ' + chef.lastName}"
+                    th:selected="${dish.chef != null} ? ${chef.id} == ${dish.chef.id} : false">
+            </option>
+        </select>
+    </label>
+    <br><br>
     <input type="submit" th:value="${dish.id != null} ? 'Update Dish' : 'Add Dish'">
 </form>
 

@@ -21,9 +21,18 @@ public class DishController {
     }
 
     @GetMapping
-    public String getDishesPage(@RequestParam(required = false) String error, Model model) {
+    public String getDishesPage(@RequestParam(required = false) String error,
+                                Model model,
+                                @RequestParam(required = false) Long chefId) {
         model.addAttribute("dishes", dishService.listDishes());
+        model.addAttribute("chefs", chefService.listChefs());
         model.addAttribute("error", error);
+
+        if(chefId != null){
+            Chef chef = chefService.findById(chefId);
+            model.addAttribute("filteredChef", chef);
+            model.addAttribute("chefDishes", dishService.findAllByChef_Id(chefId));
+        }
         return "listDishes";
     }
 
@@ -31,8 +40,9 @@ public class DishController {
     public String saveDish(@RequestParam String dishId,
                            @RequestParam String name,
                            @RequestParam String cuisine,
-                           @RequestParam int preparationTime) {
-        dishService.create(dishId, name, cuisine, preparationTime);
+                           @RequestParam int preparationTime,
+                           @RequestParam Long chefId) {
+        dishService.create(dishId, name, cuisine, preparationTime, chefId);
         return "redirect:/dishes";
     }
 
@@ -41,8 +51,9 @@ public class DishController {
                            @RequestParam String dishId,
                            @RequestParam String name,
                            @RequestParam String cuisine,
-                           @RequestParam int preparationTime) {
-        dishService.update(id, dishId, name, cuisine, preparationTime);
+                           @RequestParam int preparationTime,
+                           @RequestParam Long chefId) {
+        dishService.update(id, dishId, name, cuisine, preparationTime, chefId);
         return "redirect:/dishes";
     }
 
@@ -56,6 +67,7 @@ public class DishController {
     @GetMapping("/dish-form")
     public String getAddDishPage(Model model) {
         model.addAttribute("dish", new Dish());
+        model.addAttribute("chefs", chefService.listChefs());
         return "dish-form";
     }
 
@@ -66,6 +78,8 @@ public class DishController {
             return "redirect:/dishes?error=DishNotFound";
         }
         model.addAttribute("dish", dish);
+        model.addAttribute("chefs", chefService.listChefs());
+
         return "dish-form";
     }
 
@@ -88,15 +102,10 @@ public class DishController {
         return "redirect:/dishes/add-to-chef?chefId=" + chefId + "n&dishId=" + dishId;
     }
 
-    @GetMapping("/like/{id}")
-    public String updateDishLike(@PathVariable Long id){
-        dishService.updateType(id, true);
-        return "redirect:/dishes";
-    }
-
-    @GetMapping("/unlike/{id}")
-    public String updateDishUnLike(@PathVariable Long id){
-        dishService.updateType(id, false);
-        return "redirect:/dishes";
+    @GetMapping("/chef/{chefId}")
+    public String getDishesByChef(@PathVariable Long chefId, Model model) {
+        model.addAttribute("chef", chefService.findById(chefId));
+        model.addAttribute("dishes", dishService.findAllByChef_Id(chefId));
+        return "dishes_by_chef";
     }
 }
