@@ -20,16 +20,14 @@ public class ChefDetailsServlet extends HttpServlet {
 
     private final SpringTemplateEngine springTemplateEngine;
     private final ChefService chefService;
-    private final DishService dishService;
 
     public ChefDetailsServlet(SpringTemplateEngine springTemplateEngine, ChefService chefService, DishService dishService) {
         this.springTemplateEngine = springTemplateEngine;
         this.chefService = chefService;
-        this.dishService = dishService;
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         IWebExchange webExchange = JakartaServletWebApplication
                 .buildApplication(getServletContext())
                 .buildExchange(req, resp);
@@ -48,7 +46,7 @@ public class ChefDetailsServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String chefId = req.getParameter("chefId");
         String dishhId = req.getParameter("dishId");
 
