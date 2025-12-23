@@ -1,6 +1,5 @@
 package mk.ukim.finki.wp.lab.web;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,16 +30,20 @@ public class DishServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        resp.setContentType("text/html;charset=UTF-8");
+
         IWebExchange webExchange = JakartaServletWebApplication
                 .buildApplication(getServletContext())
                 .buildExchange(req, resp);
 
         WebContext context = new WebContext(webExchange);
 
-        Long chefId = Long.parseLong(req.getParameter("chefId"));
-
-        Chef chef = chefService.findById(chefId);
-
+        String chefIdParam = req.getParameter("chefId");
+        if (chefIdParam != null) {
+            try {
+                Long chefId = Long.parseLong(chefIdParam);
+                Chef chef = chefService.findById(chefId);
 
         context.setVariable("dishes", dishService.listDishes());
         context.setVariable("chefId", chef.getId());
@@ -48,12 +51,18 @@ public class DishServlet extends HttpServlet {
         context.setVariable("chefSurname", chef.getLastName());
 
         templateEngine.process("dishesList.html", context, resp.getWriter());
+            } catch (NumberFormatException e) {
+                resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid chefId");
+            }
+        } else {
+            resp.sendRedirect("/dishes");
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String chefId = req.getParameter("chefId");
-
+        System.out.println("chiD " + chefId);
         resp.sendRedirect("/dish?chefId=" + chefId);
     }
 

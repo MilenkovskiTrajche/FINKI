@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>All Dishes</title>
@@ -32,14 +33,54 @@
             margin: 0 1.5%;
             width: 30%;
         }
+        a.button,button {
+            display: inline-block;
+            padding: 10px 20px;         /* внатрешен простор */
+            background-color: #4CAF50;  /* зелена боја */
+            color: white;               /* текстот бел */
+            text-decoration: none;      /* без underline */
+            border-radius: 5px;         /* заоблени агли */
+            font-weight: bold;           /* малку потежок текст */
+            transition: background-color 0.3s ease; /* ефект при hover */
+        }
+
+        a.button:hover {
+            background-color: #45a049;  /* малку потемна зелена при hover */
+            cursor: pointer;             /* покажувач како на копче */
+        }
+
+        a.button:active {
+            background-color: #3e8e41;
+        }
+
     </style>
 </head>
 <body>
+
+<p sec:authorize="isAuthenticated()">
+    LOGGED IN as:
+    <strong th:text="${#authentication.name}"></strong>
+</p>
+<p sec:authorize="!isAuthenticated()">
+    NOT LOGGED IN
+    <a th:href="@{/login}" class="button">Login</a>
+</p>
+
+<form sec:authorize="isAuthenticated()"
+      th:action="@{/logout}"
+      method="post"
+      style="display:inline;">
+    <button type="submit">Logout</button>
+</form>
+
+<br><br><br>
+
 <h1>All Dishes</h1>
 
 <p th:if="${error}" th:text="${error}" style="color:red;"></p>
 
-<a th:href="@{/dishes/dish-form}">Add New Dish</a>
+<a sec:authorize="hasRole('ADMIN')"
+   th:href="@{/dishes/dish-form}" class="button">Add New Dish</a>
 
 <table>
     <tr>
@@ -55,8 +96,16 @@
         <td th:text="${dish.cuisine}"></td>
         <td th:text="${dish.preparationTime}"></td>
         <td>
-            <a th:href="@{/dishes/dish-form/{id}(id=${dish.id})}">Edit</a>
-            <a th:href="@{/dishes/delete/{id}(id=${dish.id})}">Delete</a>
+            <a sec:authorize="hasRole('ADMIN')"
+               th:href="@{/dishes/dish-form/{id}(id=${dish.id})}"
+               class="button">
+                Edit
+            </a>
+            <a sec:authorize="hasRole('ADMIN')"
+               th:href="@{/dishes/delete/{id}(id=${dish.id})}"
+               class="button">
+                Delete
+            </a>
         </td>
     </tr>
 </table>
@@ -97,6 +146,8 @@
         </table>
     </div>
 </div>
+
+<br><br><br><br><br><br><br><br>
 
 </body>
 </html>
